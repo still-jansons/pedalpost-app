@@ -11,7 +11,8 @@
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
         "build:prod": "ng build --prod --output-hashing none && cp /public/assets/angular/index.html /views/angular.blade.php",
-        "build": "ng build --output-hashing none && cp ./public/assets/angular/index.html ./resources/views/angular.blade.php && ng build --watch"
+        "build": "ng build --output-hashing none && cp ./public/assets/angular/index.html ./resources/views/angular.blade.php",
+        "build:watch": "ng build --output-hashing none && cp ./public/assets/angular/index.html ./resources/views/angular.blade.php && ng build --watch"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^0.1102.5",
