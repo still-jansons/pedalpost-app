@@ -1,0 +1,21 @@
+<div class="d-flex align-items-center">
+    <div class='mr-2 pr-2'style='flex: 1;'>
+        <h6 class="mb-0" style='color: white; font-size: 14px;'>{{data.message}}</h6>
+    </div>
+    <div class="align-right">
+        <span *ngIf='data.processed == null'>
+            <fa-icon icon='spinner'
+            [fixedWidth]="true"
+            [pulse]="true"
+            style="font-size: 14px;"></fa-icon>
+        </span>
+        <span *ngIf="data.processed == false">
+            <fa-icon icon='exclamation-triangle'
+            style="font-size: 14px; color: #ffad45;"></fa-icon>
+        </span>
+        <span *ngIf="data.processed">
+            <fa-icon icon='check-circle'
+            style="font-size: 14px; color: #38ff65;"></fa-icon>
+        </span>
+    </div>   
+</div>

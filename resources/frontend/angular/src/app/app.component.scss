@@ -1,0 +1,26 @@
+.routes-wrapper {
+    .view-item {
+        background: white;
+        border: 1px solid #cecece;
+        margin-bottom: 10px;
+        width: 100%;
+        height: 45px;
+        .view-text {
+            color: black;
+        }
+    }
+    .view-item.view-active {
+        border-color: transparent;
+        background-color: black;
+        .view-text {
+            color: white;
+        }
+    }
+    .view-item:not(.view-active):hover {
+        background: #e6e6e6;
+    }
+}
+
+.column-header-label {
+    color: #6c757d;
+}

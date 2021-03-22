@@ -1,0 +1,28 @@
+<div class='dialog-container'>
+    <div class='dialog-header-wrapper d-flex align-items-center border-bottom'>
+        <div style='flex: 1;'>
+            <h5 *ngIf='clientData' class='font-weight-bold mb-0'>Edit client name</h5>
+            <h5 *ngIf='!clientData' class='font-weight-bold mb-0'>Add new client</h5>
+        </div>
+    </div>
+    <div class='dialog-secction-wrapper' style='padding-top: 30px;'>
+        <div class='w-100'>
+            <mat-form-field class='w-100' appearance="outline">
+                <mat-label>Name of the client</mat-label>
+                <input [(ngModel)]="clientForm.name" matInput placeholder="Client" class='font-weight-bold' style='font-size: 18px;'>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class='dialog-footer'>
+        <button mat-stroked-button class='animation pill-button mr-1' (click)='closeDialog(null);' style='background: lightgray; border-color: transparent;'>
+            Cancel
+        </button>
+        <button mat-stroked-button
+        class='animation pill-button dark'
+        [disabled]='clientForm.name === "" || savingForm'
+        (click)='submitForm();'>
+            <span *ngIf='clientData'>Update</span>
+            <span *ngIf='!clientData'>Submit</span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+.dialog-container {
+    max-height: 90vh;
+    width: 90vw;
+    max-width: 700px;
+    .dialog-header-wrapper {
+        padding: 20px 30px;
+        z-index: 10;
+        position: sticky;
+        top: 0px;
+        background-color: white;
+    }
+    .dialog-footer {
+        padding: 20px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .dialog-secction-wrapper {
+        padding: 0px 30px;
+    }
+    .pill-button {
+        border-radius: 25px;
+        border-color: black;
+        background: white;
+        font-weight: 700;
+        line-height: 29px;
+    }
+    .pill-button:hover {
+        background: black;
+        color: white;
+    }
+    .pill-button.dark {
+        background: black;
+        color: white;
+    }
+    .pill-button.dark.mat-button-disabled {
+        border-color: rgb(100, 100, 100);
+        background: rgb(87, 87, 87);
+        border-color: transparent;
+    }
+}

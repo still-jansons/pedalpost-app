@@ -1,0 +1,71 @@
+<div>
+    <div class='d-flex align-items-center pl-4 pr-4 border-bottom position-relative view-header-wrapper' style='height: 70px;'>
+        <div>
+            <h4 class='mb-0 font-weight-bold'>Clients</h4>
+        </div>
+        <div class='pl-2 ml-2 border-left'>
+            <button mat-stroked-button class='animation pill-button' (click)='openClientFormDialog(null);'>
+                + Add client
+            </button>
+        </div>
+    </div>
+    <div *ngIf='!gettingClients; else isLoading'>
+        <div *ngIf='clients.length > 0; else isEmpty;' class='w-100 d-flex justify-content-center pl-4 pr-4' style='height: calc(100vh - 70px);'>
+            <div class='pt-3' style='flex:1; max-width: 800px; overflow: auto;'>
+                <div *ngFor='let client of clients' class='border shadow-sm mb-3' style='background: white; border-radius: 6px;'>
+                    <div class='d-flex align-items-center' style='padding: 15px 25px;'>
+                        <div>
+                            <h5 class='mb-0 font-weight-bold'>{{client.name}}</h5>
+                        </div>
+                        <div class='ml-2 pl-2 border-left' style='flex: 1;'>
+                            <button mat-stroked-button class='animation pill-button mr-2' (click)='openClientFormDialog(client);'>
+                                <span><fa-icon icon='pen' [fixedWidth]='true' class='mr-2'></fa-icon>Edit name</span>
+                            </button>
+                        </div>
+                        <div class='ml-2 pl-2 border-left'>
+                            <button mat-stroked-button class='animation pill-button' (click)='showClientsApiData(client.uuid);'>
+                                <span *ngIf='client.uuid !== showApiClient.uuid'><fa-icon icon='eye' [fixedWidth]='true' class='mr-2' style='font-size: 15px;'></fa-icon>Show API info</span>
+                                <span *ngIf='client.uuid === showApiClient.uuid'><fa-icon icon='eye-slash' [fixedWidth]='true' class='mr-2' style='font-size: 15px;'></fa-icon>Hide API info</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div *ngIf='client.uuid === showApiClient.uuid' class='border-top'>
+                        <div *ngIf='showApiClient.api_token; else tokenLoading' style='padding: 25px;'>
+                            <div class='mb-3 d-flex align-items-center'>
+                                <div>
+                                    <h6 class='font-weight-bold mb-0' style='color: #1f2931;'>API Json</h6>
+                                </div>
+                                <div class='ml-2 pl-2 border-left'>
+                                    <button mat-stroked-button class='animation pill-button' (click)='updateClientToken(client.uuid);'>
+                                        <span><fa-icon icon='sync' [fixedWidth]='true' class='mr-2'></fa-icon>Regenerate token</span>
+                                    </button>
+                                </div>
+                            </div>
+<pre class='mb-0'>
+{{ '{' }}
+    'uuid': {{showApiClient.uuid}},
+    'api_token': {{showApiClient.api_token}}
+{{ '}' }}
+</pre>
+                        </div>
+                        <ng-template #tokenLoading>
+                            <div class='spinner d-flex align-items-center justify-content-center' style='padding: 25px;'>
+                                <mat-progress-spinner mode="indeterminate" diameter='24' strokeWidth='4'></mat-progress-spinner>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #isLoading>
+        <div class='spinner d-flex align-items-center justify-content-center' style='height: calc(100vh - 70px);'>
+            <mat-progress-spinner mode="indeterminate" diameter='30' strokeWidth='4'></mat-progress-spinner>
+        </div>
+    </ng-template>
+    <ng-template #isEmpty>
+        <div class='w-100 d-flex align-items-center justify-content-center' style='height: calc(100vh - 70px);'>
+            <h5 class='font-weight-bold' style='color: grey;'><fa-icon icon='folder-open' class='mr-2'></fa-icon>Clients list is empty</h5>
+        </div>
+    </ng-template>
+</div>

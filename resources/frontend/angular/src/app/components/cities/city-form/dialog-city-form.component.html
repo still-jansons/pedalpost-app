@@ -1,0 +1,138 @@
+<div class='dialog-container'>
+    <div class='dialog-header-wrapper d-flex align-items-center border-bottom'>
+        <div style='flex: 1;'>
+            <h5 *ngIf='cityData' class='font-weight-bold mb-0'>Edit city</h5>
+            <h5 *ngIf='!cityData' class='font-weight-bold mb-0'>Add new city</h5>
+        </div>
+    </div>
+    <div class='dialog-secction-wrapper' style='padding-top: 30px;'>
+        <div class='w-100'>
+            <mat-form-field class='w-100' appearance="outline">
+                <mat-label>Name of the city</mat-label>
+                <input [(ngModel)]="cityForm.name" matInput placeholder="City" class='font-weight-bold' style='font-size: 18px;'>
+            </mat-form-field>
+        </div>
+        <hr>
+        <div class='w-100'>
+            <div class='mb-3 d-flex align-items-center'>
+                <div class='pr-2 mr-2 border-right'>
+                    <h6 class='mb-0 font-weight-bold'>Supported zip codes</h6>
+                </div>
+                <button *ngIf='!showNewCodesInput' mat-stroked-button class='animation pill-button' (click)='showNewCodesInput = true;'>
+                    + Add codes
+                </button>
+                <div *ngIf='showNewCodesInput'>
+                    <button mat-stroked-button class='animation pill-button mr-1' (click)='addNewCodes(false);' style='background: lightgray; border-color: transparent;'>
+                        Cancel
+                    </button>
+                    <button mat-stroked-button class='animation pill-button dark' (click)='addNewCodes(true);'>
+                        + Add
+                    </button>
+                </div>
+            </div>
+            <div *ngIf='showNewCodesInput' class='d-flex mb-4'>
+                <mat-form-field class='w-100' appearance="outline">
+                    <mat-label>Supported zip codes</mat-label>
+                    <input [(ngModel)]="newCodesInput"
+                    matInput
+                    placeholder="Enter zip codes"
+                    class='font-weight-bold' style='font-size: 18px;'
+                    (keydown.enter)="addNewCodes(true);">
+                    <mat-hint class='font-weight-bold'><span class='mr-1' style='color: #e87700;'>Important:</span>To add multiple zip codes, please seperate each code with comma ( , ) symbol. E.g.<span class='ml-1' style='color: black;'>0026, 0037, 0159...</span></mat-hint>
+                </mat-form-field>
+            </div>
+            <div *ngIf='cityForm.zip_codes.length > 0; else indexIsEmpty;' class='d-flex flex-wrap'>
+                <div *ngFor='let code of cityForm.zip_codes; let zip_index = index' class='animation zip-code-pill'>
+                    <h6 class='mb-0 font-weight-bold' style='flex: 1;'>{{code}}</h6>
+                    <fa-icon icon='times-circle' (click)='removeZipCode(zip_index);' class='ml-2' style='margin-right: -5px; color: #ff5151;'></fa-icon>
+                </div>
+            </div>
+            <ng-template #indexIsEmpty>
+                <div class='d-flex align-items-center justify-content-center' style='background: #d9edff; padding: 15px; border-radius: 5px;'>
+                    <h6 class='mb-0 font-weight-bold' style='color: #265b94'><fa-icon icon='folder-open' class='mr-2'></fa-icon>Zip codes list is empty</h6>
+                </div>
+            </ng-template>
+        </div>
+        <hr>
+        <div class='w-100'>
+            <div class='mb-3 d-flex align-items-center'>
+                <div class='pr-2 mr-2 border-right'>
+                    <h6 class='mb-0 font-weight-bold'>Available capacity schedule</h6>
+                </div>
+                <button *ngIf='!showScheduleForm' mat-stroked-button class='animation pill-button' (click)='addNewTimeRow();'>
+                    + Add row
+                </button>
+            </div>
+            <div *ngIf='cityForm.capacity_schedule.length > 0; else scheduleIsEmpty;'>
+                <div class='d-flex align-items-center' style='height: 30px; border-bottom: 1px solid #6c757d;'>
+                    <div style='width: 200px;'class='mr-2 pr-2 border-right'>
+                        <h6 class='mb-0 column-header-label'>Available time frame</h6>
+                    </div>
+                    <div style='flex:1;' class='mr-2 pr-2 border-right'>
+                        <h6 class='mb-0 column-header-label'>Capacity</h6>
+                    </div>
+                    <div class='d-flex' style='flex:3;'>
+                        <div *ngFor='let day of weekArray' style='flex: 1;' class='mr-2 pr-2 border-right'>
+                            <h6 class='mb-0 column-header-label'>{{day}}</h6>
+                        </div>
+                    </div>
+                    <div style='width: 30px;'></div>
+                </div>
+                <div *ngFor='let time_row of cityForm.capacity_schedule; let i = index;' class='d-flex align-items-center' style='border-bottom: 1px solid #B2BBBC; height: 40px;'>
+                    <div style='width: 200px;' class='mr-2 pr-2 border-right d-flex align-items-center'>
+                        <input [(ngModel)]="time_row.time_from"
+                        matInput
+                        type="time"
+                        placeholder="00:00"
+                        class='font-weight-bold' style='font-size: 18px;'>
+                        <h4 class='mr-2 ml-2 mb-0' style='font-size: 18px;'>/</h4>
+                        <input [(ngModel)]="time_row.time_to"
+                        matInput
+                        type="time"
+                        placeholder="00:00"
+                        class='font-weight-bold' style='font-size: 18px;'>
+                    </div>
+                    <div style='flex:1;' class='mr-2 pr-2 border-right'>
+                        <input [(ngModel)]="time_row.capacity"
+                        matInput
+                        type="number"
+                        placeholder="0"
+                        class='font-weight-bold' style='font-size: 18px;'>
+                    </div>
+                    <div class='d-flex' style='flex:3;'>
+                        <div *ngFor='let day of time_row.availability_trough_week' style='flex: 1;' class='mr-2 pr-2 border-right'>
+                            <mat-checkbox class="example-margin"
+                            [(ngModel)]="day.available"
+                            [checked]="day.available">
+                            </mat-checkbox>
+                        </div>
+                    </div>
+                    <div style='width: 30px;'>
+                        <div class='d-flex align-items-center justify-content-center'
+                        style='width: 30px; height: 30px; cursor: pointer; margin-left: -4px;'
+                        (click)='removeTimeRow(i);'>
+                            <fa-icon icon='times-circle' style='font-size: 16px; color: #ff5151;'></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <ng-template #scheduleIsEmpty>
+                <div class='d-flex align-items-center justify-content-center' style='background: #d9edff; padding: 15px; border-radius: 5px;'>
+                    <h6 class='mb-0 font-weight-bold' style='color: #265b94'><fa-icon icon='folder-open' class='mr-2'></fa-icon>Capacity schedule list is empty</h6>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class='dialog-footer'>
+        <button mat-stroked-button class='animation pill-button mr-1' (click)='closeDialog(null);' style='background: lightgray; border-color: transparent;'>
+            Cancel
+        </button>
+        <button mat-stroked-button
+        class='animation pill-button dark'
+        (click)='submitForm();'
+        [disabled]='cityForm.capacity_schedule.length === 0 || cityForm.zip_codes.length === 0 || cityForm.name === "" || savingForm'>
+            <span *ngIf='cityData'>Update</span>
+            <span *ngIf='!cityData'>Submit</span>
+        </button>
+    </div>
+</div>

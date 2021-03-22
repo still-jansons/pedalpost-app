@@ -1,0 +1,32 @@
+.view-header-wrapper {
+    position: sticky !important;
+    top: 0px;
+    z-index: 10;
+    background-color: white;
+}
+.pill-button {
+    border-radius: 25px;
+    border-color: black;
+    background: white;
+    font-weight: 700;
+    line-height: 29px;
+}
+.pill-button.danger {
+    border-color: #ff5151;
+    color: #ff5151;
+}
+.pill-button:hover {
+    background: black;
+    color: white;
+}
+.pill-button.danger:hover {
+    background: #ff5151;
+    color: white;
+}
+pre {
+    border-radius: 16px;
+    background: #1f2831;
+    color: white;
+    font-weight: 500;
+    padding: 20px 25px;
+}
