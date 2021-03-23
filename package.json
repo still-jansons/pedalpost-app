@@ -10,7 +10,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "build:prod": "ng build --prod --output-hashing none && cp /public/assets/angular/index.html /views/angular.blade.php",
+        "build:prod": "ng build --prod --output-hashing none && cp ./public/assets/angular/index.html ./views/angular.blade.php",
         "build": "ng build --output-hashing none && cp ./public/assets/angular/index.html ./resources/views/angular.blade.php",
         "build:watch": "ng build --output-hashing none && cp ./public/assets/angular/index.html ./resources/views/angular.blade.php && ng build --watch"
     },

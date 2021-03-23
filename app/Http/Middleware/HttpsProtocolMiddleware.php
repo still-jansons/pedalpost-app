@@ -17,7 +17,7 @@ class HttpsProtocolMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!$request->secure() && app()->environment('production')) {
+        if (!$request->secure()) {
             return redirect()->secure($request->getRequestUri());
         }
 
