@@ -24,7 +24,7 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 // return redirect(RouteServiceProvider::HOME);
-                return redirect('login')->with('fail', 'To access this page you must be logged in');
+                return redirect()->intended('overview');
             }
         }
 

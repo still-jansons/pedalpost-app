@@ -56,7 +56,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'authCheck' => \App\Http\Middleware\AuthCheck::class,
         // 'redirectIfAuth' => \App\Http\Middleware\RedirectIfAuth::class,
-        // 'redirectIfAuth' => \App\Http\Middleware\RedirectIfAuth::class,
+        'checkAuth' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
@@ -65,7 +65,6 @@ class Kernel extends HttpKernel
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'https' => \App\Http\Middleware\HttpsProtocolMiddleware::class
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class
     ];
 }
