@@ -19,16 +19,16 @@ class ApiTokenCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        // $client = Client::where([
-        //     ['uuid', json_decode($request->getContent())->uuid]
-        // ])
-        // ->get('api_token')
-        // ->first();
+        $client = Client::where([
+            ['uuid', json_decode($request->getContent())->uuid]
+        ])
+        ->get('api_token')
+        ->first();
 
-        // if(Crypt::decryptString($client->api_token) === $request->bearerToken()) {
-        //     return $next($request);
-        // }
-        // return dd('Warning: Unauthorized action.');
-        return $next($request);
+        if(Crypt::decryptString($client->api_token) === $request->bearerToken()) {
+            return $next($request);
+        }
+        return dd('Warning: Unauthorized action.');
+        // return $next($request);
     }
 }
