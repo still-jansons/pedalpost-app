@@ -17,14 +17,17 @@ use App\Http\Controllers\Auth\UserAuthController;
 |
 */
 
-Route::get('/', [UserAuthController::class, 'login'])->middleware('redirectIfAuth');
-Route::get('/login', [UserAuthController::class, 'login'])->middleware('redirectIfAuth');
+// Route::get('/', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
+Route::get('/', [UserAuthController::class, 'login']);
+// Route::get('/login', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
+Route::get('/login', [UserAuthController::class, 'login'])->name('login');
 // Route::get('/register', [UserAuthController::class, 'register'])->middleware('redirectIfAuth');
 Route::post('/create', [UserAuthController::class, 'createUser'])->name('auth.create');
-Route::post('/check', [UserAuthController::class, 'loginUser'])->name('auth.check');
+// Route::post('/check', [UserAuthController::class, 'loginUser'])->name('auth.check');
+Route::post('/check', [UserAuthController::class, 'authenticate'])->name('auth.check');
 Route::get('/logout', [UserAuthController::class, 'logout']);
 
-Route::middleware(['authCheck'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::any('/{any}', [AngularController::class, 'index'])->where(
         ['any', '^(?!api).*$'],
         ['any', '^(?!web).*$']

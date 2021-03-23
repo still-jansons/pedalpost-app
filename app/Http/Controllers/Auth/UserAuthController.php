@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserAuthController extends Controller
 {
@@ -19,12 +20,22 @@ class UserAuthController extends Controller
         return view('auth.register');
     }
     
-    function logout() 
+    // function logout() 
+    // {
+    //     if(session()->has('LoggedUser')) {
+    //         session()->pull('LoggedUser');
+    //         return redirect('login');
+    //     }
+    // }
+    public function logout(Request $request)
     {
-        if(session()->has('LoggedUser')) {
-            session()->pull('LoggedUser');
-            return redirect('login');
-        }
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('login');
     }
 
     function createUser(Request $request) 
@@ -48,31 +59,52 @@ class UserAuthController extends Controller
         }
     }
 
-    function loginUser(Request $request) 
+    // function loginUser(Request $request) 
+    // {
+    //     $request->validate([
+    //         'email' => 'required|email',
+    //         'password' => 'required'
+    //     ]);
+
+    //     $user = User::where('email', '=', $request->email)->first();
+
+    //     if($user) {
+    //         if(Hash::check($request->password, $user->password)) {
+    //             $request->session()->put('LoggedUser', $user->id);
+    //             return redirect('/overview');
+    //         } else {
+    //             return back()->with('fail', 'You are not authorised to come in');
+    //         }
+    //     } else {
+    //         return back()->with('fail', 'You are not authorised to come in');
+    //     }
+    // }
+
+    public function authenticate(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+        $credentials = $request->only('email', 'password');
 
-        $user = User::where('email', '=', $request->email)->first();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        if($user) {
-            if(Hash::check($request->password, $user->password)) {
-                $request->session()->put('LoggedUser', $user->id);
-                return redirect('/overview');
-            } else {
-                return back()->with('fail', 'You are not authorised to come in');
-            }
-        } else {
-            return back()->with('fail', 'You are not authorised to come in');
+            return redirect()->intended('overview');
         }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ]);
     }
 
-    function getLoggedUser(Request $request) 
+    function getLoggedUser() 
     {
-        if(session()->has('LoggedUser')) {
-            return User::where('id', '=', session('LoggedUser'))->select('email', 'name')->first();
+        if (Auth::user()) {
+            return [
+                'email' => Auth::user()->email,
+                'name' => Auth::user()->name
+            ];
         }
+        // if(session()->has('LoggedUser')) {
+        //     return User::where('id', '=', session('LoggedUser'))->select('email', 'name')->first();
+        // }
     }
 }
