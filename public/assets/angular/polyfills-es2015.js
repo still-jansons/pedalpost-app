@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/arturs/Documents/Projekti/App/pedalpost-app/resources/frontend/angular/src/polyfills.ts */"GTzl");
+module.exports = __webpack_require__(/*! /Users/arturs/Documents/Projekti/App/git-hub/pedalpost-app/resources/frontend/angular/src/polyfills.ts */"GTzl");
 
 
 /***/ }),
