@@ -6,6 +6,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\UserAuthController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,16 +17,19 @@ use App\Http\Controllers\Auth\UserAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
 Route::get('/', [UserAuthController::class, 'login']);
-// Route::get('/login', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
 Route::get('/login', [UserAuthController::class, 'login'])->name('login')->middleware('checkAuth');
-// Route::get('/register', [UserAuthController::class, 'register'])->middleware('redirectIfAuth');
-Route::post('/create', [UserAuthController::class, 'createUser'])->name('auth.create');
-// Route::post('/check', [UserAuthController::class, 'loginUser'])->name('auth.check');
-Route::post('/check', [UserAuthController::class, 'authenticate'])->name('auth.check');
-Route::get('/logout', [UserAuthController::class, 'logout']);
+Route::group(['scheme' => 'https'], function () {
+    // Route::get(...)->name(...);
+    // Route::get('/', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
+    // Route::get('/login', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
+    // Route::get('/register', [UserAuthController::class, 'register'])->middleware('redirectIfAuth');
+    Route::post('/create', [UserAuthController::class, 'createUser'])->name('auth.create');
+    // Route::post('/check', [UserAuthController::class, 'loginUser'])->name('auth.check');
+    Route::post('/check', [UserAuthController::class, 'authenticate'])->name('auth.check');
+    Route::get('/logout', [UserAuthController::class, 'logout']);
+});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::any('/{any}', [AngularController::class, 'index'])->where(
