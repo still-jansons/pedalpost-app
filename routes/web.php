@@ -17,7 +17,7 @@ use App\Http\Controllers\Auth\UserAuthController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
+Route::group(['scheme' => 'https'], function () {
     // Route::get(...)->name(...);
     // Route::get('/', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
     // Route::get('/login', [UserAuthController::class, 'login'])->middleware('redirectIfAuthenticated');
@@ -31,7 +31,7 @@ Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
 });
 
 
-// Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
+Route::group(['scheme' => 'https'], function () {
     Route::middleware(['auth'])->group(function () {
         Route::any('/{any}', [AngularController::class, 'index'])->where(
             ['any', '^(?!api).*$'],
@@ -48,5 +48,6 @@ Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
         Route::post('web/updateClientName', [ClientController::class, 'updateClientName']);
         Route::post('web/updateClientToken', [ClientController::class, 'updateClientToken']);
         Route::get('web/getClientsToken', [ClientController::class, 'getClientsToken']);
+    });
 });
 
