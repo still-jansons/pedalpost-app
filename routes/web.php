@@ -32,7 +32,8 @@ Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
 
 
 Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
-    Route::middleware(['auth'])->group(function () {
+    // Route::middleware(['auth'])->group(function () {
+
         Route::any('/{any}', [AngularController::class, 'index'])->where(
             ['any', '^(?!api).*$'],
             ['any', '^(?!web).*$']
@@ -48,6 +49,5 @@ Route::group(['scheme' => $_ENV["URL_SCHEME"]], function () {
         Route::post('web/updateClientName', [ClientController::class, 'updateClientName']);
         Route::post('web/updateClientToken', [ClientController::class, 'updateClientToken']);
         Route::get('web/getClientsToken', [ClientController::class, 'getClientsToken']);
-    });
 });
 
