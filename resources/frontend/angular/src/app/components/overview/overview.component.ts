@@ -33,7 +33,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
         this.gettingCities = true;
         this.getCitiesSubscription = this.https.get('web/getCities', {}).subscribe((cities: []) => {
             if (cities) {
-                console.log(cities);
                 this.cities = cities;
                 this.gettingCities = false;
                 this.getCityOrders(this.cities);
@@ -47,7 +46,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
             this.getCityOrdersSubscription = this.https.get('web/getCityOrders', {
                 city_id: city.id
             }).subscribe((orders: any) => {
-                console.log(orders);
                 city.orders = orders;
             });
         }

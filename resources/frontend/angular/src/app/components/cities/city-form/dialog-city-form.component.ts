@@ -138,7 +138,6 @@ export class CityFormDialogComponent {
             zip_codes: JSON.stringify(this.cityForm.zip_codes),
             time_capacity: JSON.stringify(this.cityForm.capacity_schedule)
         }).toPromise().then((data) => {
-            console.log(data);
             this.savingForm = false;
             this.snackbarService.openSnackBar(true, 2500, 'Form saved.');
             // this.closeDialog(true);
