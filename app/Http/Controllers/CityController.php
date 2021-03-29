@@ -20,6 +20,7 @@ class CityController extends Controller
         return City::get()->map(function($city) {
             $city->zip_codes = json_decode($city->zip_codes);
             $city->capacity_schedule = json_decode($city->capacity_schedule);
+            $city->schedule_trough_week = json_decode($city->schedule_trough_week);
             return $city;
         });
     }

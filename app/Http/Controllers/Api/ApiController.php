@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Calendar;
 use App\Models\City;
+use App\Models\Order;
 
 class ApiController extends Controller
 {
@@ -49,5 +50,25 @@ class ApiController extends Controller
     public function getAvailableTimes(Request $request)
     {
         return json_decode($request->getContent());
+    }
+
+    public function createOrder(Request $request)
+    {
+        $body = json_decode($request->getContent());
+        $city = City::where([
+            ['zip_codes', 'like', "%{$body->zip_code}%"]
+        ])
+        ->get('id')
+        ->first();
+
+        $order = new Order;
+        $order->client_uuid = $body->uuid;
+        $order->zip_code = $body->zip_code;
+        $order->city_id = $city->id;
+        $order->date_id = $body->date_id;
+        $order->time_id = $body->time_id;
+        $response = $order->save();
+
+        return $response;
     }
 }

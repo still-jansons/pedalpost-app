@@ -59,27 +59,6 @@ class UserAuthController extends Controller
         }
     }
 
-    // function loginUser(Request $request) 
-    // {
-    //     $request->validate([
-    //         'email' => 'required|email',
-    //         'password' => 'required'
-    //     ]);
-
-    //     $user = User::where('email', '=', $request->email)->first();
-
-    //     if($user) {
-    //         if(Hash::check($request->password, $user->password)) {
-    //             $request->session()->put('LoggedUser', $user->id);
-    //             return redirect('/overview');
-    //         } else {
-    //             return back()->with('fail', 'You are not authorised to come in');
-    //         }
-    //     } else {
-    //         return back()->with('fail', 'You are not authorised to come in');
-    //     }
-    // }
-
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -103,8 +82,5 @@ class UserAuthController extends Controller
                 'name' => Auth::user()->name
             ];
         }
-        // if(session()->has('LoggedUser')) {
-        //     return User::where('id', '=', session('LoggedUser'))->select('email', 'name')->first();
-        // }
     }
 }

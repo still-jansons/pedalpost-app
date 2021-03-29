@@ -10,6 +10,6 @@ class Order extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'id', 'user_uuid', 'city_id', 'zip_code', 'date_id', 'created_at', 'updated_at'
+        'id', 'client_uuid', 'city_id', 'zip_code', 'time_id', 'date_id', 'created_at', 'updated_at'
     ];
 }

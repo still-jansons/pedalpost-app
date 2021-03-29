@@ -18,3 +18,4 @@ use App\Http\Controllers\Api\ApiController;
 Route::get('checkCityZip', [ApiController::class, 'checkCityZip']);
 Route::get('getDates', [ApiController::class, 'getDates']);
 Route::get('getAvailableTimes', [ApiController::class, 'getAvailableTimes']);
+Route::post('createOrder', [ApiController::class, 'createOrder']);

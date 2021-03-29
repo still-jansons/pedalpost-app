@@ -4,7 +4,45 @@
             <h4 class='mb-0 font-weight-bold'>Overview</h4>
         </div>
     </div>
-    <div>
-        
+    <div *ngIf='!gettingCities; else isLoading'>
+        <div *ngIf='cities.length > 0; else isEmpty;'>
+            <input placeholder="Search city..." autocomplete="off" class='animation border-bottom search-cities-wrapper' [(ngModel)]="citySearchInput">
+            <div class='list-cities'>
+                <div *ngFor='let city of cities | filterByKey : citySearchInput : "name"' class='city-container shadow-sm'>
+                    <div class='city-container-header border-bottom'>
+                        <div class='d-flex align-items-center' style='flex: 1;'>
+                            <h5 class='mb-0 font-weight-bold'>{{city.name}}</h5>
+                        </div>
+                    </div>
+                    <div class='city-container-body'>
+                        <div *ngIf='city.orders !== null; else ordersIsLoading'>
+                            <div *ngIf='city.orders.length < 0; else ordersIsEmpty'>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <ng-template #isLoading>
+        <div class='spinner d-flex align-items-center justify-content-center' style='height: calc(100vh - 70px);'>
+            <mat-progress-spinner mode="indeterminate" diameter='30' strokeWidth='4'></mat-progress-spinner>
+        </div>
+    </ng-template>
+    <ng-template #isEmpty>
+        <div class='w-100 d-flex align-items-center justify-content-center' style='height: calc(100vh - 70px);'>
+            <h5 class='font-weight-bold mb-0' style='color: grey;'><fa-icon icon='folder-open' class='mr-2'></fa-icon>Cities list is empty</h5>
+        </div>
+    </ng-template>
+    <ng-template #ordersIsLoading>
+        <div class='spinner d-flex align-items-center justify-content-center'>
+            <mat-progress-spinner mode="indeterminate" diameter='24' strokeWidth='4'></mat-progress-spinner>
+        </div>
+    </ng-template>
+    <ng-template #ordersIsEmpty>
+        <div class='w-100 d-flex align-items-center justify-content-center'>
+            <h6 class='font-weight-bold mb-0' style='color: grey;'><fa-icon icon='folder-open' class='mr-2'></fa-icon>Orders list is empty</h6>
+        </div>
+    </ng-template>
 </div>

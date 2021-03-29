@@ -29,6 +29,5 @@ class ApiTokenCheck
             return $next($request);
         }
         return dd('Warning: Unauthorized action.');
-        // return $next($request);
     }
 }
