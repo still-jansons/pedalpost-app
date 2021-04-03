@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\Auth\UserAuthController;
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -41,6 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('web/updateClientToken', [ClientController::class, 'updateClientToken']);
     Route::get('web/getClientsToken', [ClientController::class, 'getClientsToken']);
     
-    Route::get('web/getCityOrders', [OrderController::class, 'getCityOrders']);
+    Route::get('web/getOrdersByDate', [OrderController::class, 'getOrdersByDate']);
+
+    Route::get('web/getDates', [CalendarController::class, 'getDates']);
 });
 

@@ -1,0 +1,12 @@
+.table-header-row {
+    height: 30px;
+    border-bottom: 1px solid #6c757d;
+    .column-header-label {
+        font-size: 14px;
+        font-weight: 500;
+    }
+}
+.date-item {
+    padding: 14px 0px;
+    cursor: default;
+}

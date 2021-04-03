@@ -35,8 +35,8 @@ export class CityFormDialogComponent {
     scheduleRowForm = {
         time_from: '00:00',
         time_to: '00:00',
-        capacity: Number,
-        time_id: Number,
+        capacity: 0,
+        time_id: '',
         availability_trough_week: [
             {
                 day: 'monday',
@@ -130,6 +130,7 @@ export class CityFormDialogComponent {
             const time_from = schedule.time_from.replaceAll(":", "");
             const time_to = schedule.time_to.replaceAll(":", "");
             schedule.time_id = time_from.concat(time_to);
+
         }
 
         this.https.post('web/updateOrCreateCity', {
@@ -138,9 +139,9 @@ export class CityFormDialogComponent {
             zip_codes: JSON.stringify(this.cityForm.zip_codes),
             time_capacity: JSON.stringify(this.cityForm.capacity_schedule)
         }).toPromise().then((data) => {
-            this.savingForm = false;
             this.snackbarService.openSnackBar(true, 2500, 'Form saved.');
-            // this.closeDialog(true);
+            this.savingForm = false;
+            this.closeDialog(true);
         }).catch(err => {
             this.snackbarService.openSnackBar(false, 2500, 'Failed to save a form.');
             console.log(err);

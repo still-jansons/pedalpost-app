@@ -15,9 +15,32 @@
                         </div>
                     </div>
                     <div class='city-container-body'>
-                        <div *ngIf='city.orders !== null; else ordersIsLoading'>
-                            <div *ngIf='city.orders.length == 0; else ordersIsEmpty'>
-
+                        <div *ngIf='!gettingDates; else ordersIsLoading'>
+                            <div>
+                                <div class='d-flex align-items-center table-header-row' >
+                                    <div class='mr-2 pr-2 border-right ellipsis' style='flex: 2'>
+                                        <h6 class='mb-0 column-header-label ellipsis'>Date</h6>
+                                    </div>
+                                    <div class='mr-2 pr-2 border-right ellipsis' style='flex: 1'>
+                                        <h6 class='mb-0 column-header-label ellipsis'>Used capacity %</h6>
+                                    </div>
+                                    <div class='ellipsis' style='flex: 1'>
+                                        <h6 class='mb-0 column-header-label ellipsis'>Orders</h6>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div *ngFor='let date of dates' class='d-flex align-items-center date-item border-bottom'>
+                                        <div class='mr-2 pr-2 border-right ellipsis' style='flex: 2'>
+                                            <h6 class='mb-0'>{{date.date}}</h6>
+                                        </div>
+                                        <div class='mr-2 pr-2 border-right ellipsis' style='flex: 1'>
+                                            <h6 *ngIf='date.orders_summary[city.id]; else itemColumnIsLoading' class='mb-0'>{{date.orders_summary[city.id]?.used_capacity}}%</h6>
+                                        </div>
+                                        <div class='ellipsis' style='flex: 1'>
+                                            <h6 *ngIf='date.orders_summary[city.id]; else itemColumnIsLoading' class='mb-0'>{{date.orders_summary[city.id]?.orders}}<sapn style='color: grey;'> / {{date.orders_summary[city.id]?.total_capacity}}</sapn></h6>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -43,6 +66,11 @@
     <ng-template #ordersIsEmpty>
         <div class='w-100 d-flex align-items-center justify-content-center'>
             <h6 class='font-weight-bold mb-0' style='color: grey;'><fa-icon icon='folder-open' class='mr-2'></fa-icon>Orders list is empty</h6>
+        </div>
+    </ng-template>
+    <ng-template #itemColumnIsLoading>
+        <div class='spinner'>
+            <mat-progress-spinner mode="indeterminate" diameter='14' strokeWidth='2'></mat-progress-spinner>
         </div>
     </ng-template>
 </div>
