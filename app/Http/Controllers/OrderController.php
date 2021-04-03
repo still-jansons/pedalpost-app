@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 use App\Models\Order;
 
@@ -30,7 +31,11 @@ class OrderController extends Controller
     public function getOrdersByDate(Request $request) {
         $categorized_orders = [];
         $orders = Order::whereIn('date_id', json_decode($request->dates))
-        ->get();
+        ->get()
+        ->map(function($order) {
+            $order->client_uuid = Crypt::encryptString($order->client_uuid);
+            return $order;
+        });
 
         foreach ($orders as $order) {
             if (!array_key_exists($order->date_id, $categorized_orders)) {

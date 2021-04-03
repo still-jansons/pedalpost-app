@@ -21,6 +21,9 @@
                                     <div class='mr-2 pr-2 border-right ellipsis' style='flex: 2'>
                                         <h6 class='mb-0 column-header-label ellipsis'>Date</h6>
                                     </div>
+                                    <div class='mr-2 pr-2 border-right ellipsis' style='flex: 2'>
+                                        <h6 class='mb-0 column-header-label ellipsis'>Day of the week</h6>
+                                    </div>
                                     <div class='mr-2 pr-2 border-right ellipsis' style='flex: 1'>
                                         <h6 class='mb-0 column-header-label ellipsis'>Used capacity %</h6>
                                     </div>
@@ -32,6 +35,9 @@
                                     <div *ngFor='let date of dates' class='d-flex align-items-center date-item border-bottom'>
                                         <div class='mr-2 pr-2 border-right ellipsis' style='flex: 2'>
                                             <h6 class='mb-0'>{{date.date}}</h6>
+                                        </div>
+                                        <div class='mr-2 pr-2 border-right ellipsis' style='flex: 2'>
+                                            <h6 class='mb-0 column-header-label ellipsis'>{{date.day_name}}</h6>
                                         </div>
                                         <div class='mr-2 pr-2 border-right ellipsis' style='flex: 1'>
                                             <h6 *ngIf='date.orders_summary[city.id]; else itemColumnIsLoading' class='mb-0'>{{date.orders_summary[city.id]?.used_capacity}} %</h6>
