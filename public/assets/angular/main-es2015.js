@@ -44,7 +44,7 @@ function OverviewComponent_div_5_div_1_div_3_div_6_div_13_h6_5_Template(rf, ctx)
     const date_r16 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
     const city_r13 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2).$implicit;
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", date_r16.orders_summary[city_r13.id] == null ? null : date_r16.orders_summary[city_r13.id].used_capacity, "%");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"]("", date_r16.orders_summary[city_r13.id] == null ? null : date_r16.orders_summary[city_r13.id].used_capacity, " %");
 } }
 function OverviewComponent_div_5_div_1_div_3_div_6_div_13_h6_7_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h6", 22);
@@ -258,6 +258,7 @@ class OverviewComponent {
                 date.orders_summary[city.id] = this.getCityOrderInfo(city, date, orders);
             }
         }
+        console.log(this.dates);
     }
     getCityOrderInfo(city, date, orders) {
         let total_capacity = 0;
@@ -272,7 +273,7 @@ class OverviewComponent {
         if (orders[date.date_id]) {
             if (orders[date.date_id][city.id]) {
                 orders_count = orders[date.date_id][city.id].length;
-                used_capacity = (total_capacity === 0) ? 0 : (orders[date.date_id][city.id].length / total_capacity) * 100;
+                used_capacity = Number(((total_capacity === 0) ? 0 : (orders[date.date_id][city.id].length / total_capacity) * 100).toFixed(0));
             }
         }
         return {

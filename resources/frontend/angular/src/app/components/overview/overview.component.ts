@@ -59,7 +59,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
     getOrders(dates) {
         this.gettingOrders = true;
-        
+
         const dates_id_array = dates.map(date => {
             return date.date_id;
         });
@@ -80,6 +80,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
                 date.orders_summary[city.id] = this.getCityOrderInfo(city, date, orders);
             }
         }
+        console.log(this.dates);
     }
 
     getCityOrderInfo(city, date, orders) {
@@ -96,7 +97,7 @@ export class OverviewComponent implements OnInit, OnDestroy {
         if (orders[date.date_id]) {
             if (orders[date.date_id][city.id]) {
                 orders_count = orders[date.date_id][city.id].length;
-                used_capacity = (total_capacity === 0) ? 0 : (orders[date.date_id][city.id].length / total_capacity) * 100;
+                used_capacity = Number(((total_capacity === 0) ? 0 : (orders[date.date_id][city.id].length / total_capacity) * 100).toFixed(0));
             }
         }
 
