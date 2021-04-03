@@ -258,7 +258,6 @@ class OverviewComponent {
                 date.orders_summary[city.id] = this.getCityOrderInfo(city, date, orders);
             }
         }
-        console.log(this.dates);
     }
     getCityOrderInfo(city, date, orders) {
         let total_capacity = 0;

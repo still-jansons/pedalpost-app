@@ -80,7 +80,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
                 date.orders_summary[city.id] = this.getCityOrderInfo(city, date, orders);
             }
         }
-        console.log(this.dates);
     }
 
     getCityOrderInfo(city, date, orders) {
