@@ -65,7 +65,7 @@
             </div>
             <div *ngIf='cityForm.capacity_schedule.length > 0; else scheduleIsEmpty;'>
                 <div class='d-flex align-items-center' style='height: 30px; border-bottom: 1px solid #6c757d;'>
-                    <div style='width: 200px;'class='mr-2 pr-2 border-right'>
+                    <div style='width: 300px;'class='mr-2 pr-2 border-right'>
                         <h6 class='mb-0 column-header-label'>Available time frame</h6>
                     </div>
                     <div style='flex:1;' class='mr-2 pr-2 border-right'>
@@ -79,7 +79,7 @@
                     <div style='width: 30px;'></div>
                 </div>
                 <div *ngFor='let time_row of cityForm.capacity_schedule; let i = index;' class='d-flex align-items-center' style='border-bottom: 1px solid #B2BBBC; height: 40px;'>
-                    <div style='width: 200px;' class='mr-2 pr-2 border-right d-flex align-items-center'>
+                    <div style='width: 300px;' class='mr-2 pr-2 border-right d-flex align-items-center'>
                         <input [(ngModel)]="time_row.time_from"
                         matInput
                         type="time"
