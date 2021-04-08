@@ -90,13 +90,17 @@ export class OverviewComponent implements OnInit, OnDestroy {
         if (city.schedule_trough_week[date.day_of_week].length === 1) {
             total_capacity = city.schedule_trough_week[date.day_of_week][0].capacity;
         } else if ((city.schedule_trough_week[date.day_of_week].length > 1)) {
-            total_capacity = city.schedule_trough_week[date.day_of_week].reduce((a, b) => a.capacity + b.capacity, 0);
+            total_capacity = city.schedule_trough_week[date.day_of_week].reduce((a, b) => a + (b.capacity || 0), 0);
         }
 
         if (orders[date.date_id]) {
             if (orders[date.date_id][city.id]) {
                 orders_count = orders[date.date_id][city.id].length;
-                used_capacity = Number(((total_capacity === 0) ? 0 : (orders[date.date_id][city.id].length / total_capacity) * 100).toFixed(0));
+                if (orders_count > total_capacity) {
+                    used_capacity = 100;
+                } else {
+                    used_capacity = Number(((total_capacity === 0) ? 0 : (orders[date.date_id][city.id].length / total_capacity) * 100).toFixed(0));
+                }
             }
         }
 

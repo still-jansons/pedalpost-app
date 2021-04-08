@@ -1,5 +1,7 @@
 .view-header-wrapper {
     position: sticky !important;
+    position: -webkit-sticky !important;
+    display: block;
     top: 0px;
     z-index: 10;
     background-color: white;
