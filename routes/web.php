@@ -45,5 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('web/getOrdersByDate', [OrderController::class, 'getOrdersByDate']);
 
     Route::get('web/getDates', [CalendarController::class, 'getDates']);
+
+    // Route::get('web/getAvailableDates', [OrderController::class, 'getAvailableDates']);
 });
 
