@@ -51,8 +51,8 @@ class ApiController extends Controller
         ->first();
         // 
         
-        $city->schedule_trough_week = json_decode($city->schedule_trough_week);
         if($city) {
+            $city->schedule_trough_week = json_decode($city->schedule_trough_week);
             $response['we_deliver_here'] = 1;
             // Getting next 7 dates from now
             $dates = Calendar::where([
@@ -85,7 +85,7 @@ class ApiController extends Controller
                             'day' => $date->day,
                             'day_name' => $date->day_name,
                             'month_name' => $date->month_name,
-                            'month_name' => $date->year,
+                            'year' => $date->year,
                             'date_string' => $date->day_name . ' ' . $date->day . ' ' . $date->month_name . ', ' . $time_frame->time_from . ' - ' . $time_frame->time_to,
                             'time_id' => $time_frame->time_id,
                             'time_from' => $time_frame->time_from,
@@ -110,9 +110,9 @@ class ApiController extends Controller
             'schedule_trough_week'
         ])
         ->first();
-        $city->schedule_trough_week = json_decode($city->schedule_trough_week);
-
+        
         if ($city) {
+            $city->schedule_trough_week = json_decode($city->schedule_trough_week);
             $orders_at_specific_time = Order::where([
                 ['city_id', $city->id],
                 ['date_id', $body->date_id],
