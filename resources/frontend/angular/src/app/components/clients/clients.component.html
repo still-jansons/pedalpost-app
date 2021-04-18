@@ -28,6 +28,9 @@
                                 <span *ngIf='client.uuid === showApiClient.uuid'><fa-icon icon='eye-slash' [fixedWidth]='true' class='mr-2' style='font-size: 15px;'></fa-icon>Hide API info</span>
                             </button>
                         </div>
+                        <button mat-stroked-button class='ml-2 animation pill-button danger' (click)='openDeleteClientDialog(client);'>
+                            <span><fa-icon icon='trash' [fixedWidth]='true' class='' style='font-size: 15px;'></fa-icon></span>
+                        </button>
                     </div>
                     <div *ngIf='client.uuid === showApiClient.uuid' class='border-top'>
                         <div *ngIf='showApiClient.api_token; else tokenLoading' style='padding: 25px;'>

@@ -4,7 +4,7 @@ import { HttpService } from '../../../services/http.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 
 @Component({
-    selector: 'app-dialog-city-form',
+    selector: 'app-dialog-delete-city',
     templateUrl: './dialog-delete-city.component.html',
     styleUrls: ['./dialog-delete-city.component.scss']
 })

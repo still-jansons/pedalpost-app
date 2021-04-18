@@ -17,6 +17,7 @@ import { SnackbarMessageComponent } from './components/snackbar/snackbar-message
 // DIALOGS
 import { CityFormDialogComponent } from './components/cities/city-form/dialog-city-form.component';
 import { DeleteCityDialogComponent } from './components/cities/delete-city/dialog-delete-city.component';
+import { DeleteClientDialogComponent } from './components/clients/delete-client/dialog-delete-client.component';
 
 // FONT AWESOME
 import {FontAwesomeIconsModule} from './modules/font-awesome-icons.module';
@@ -43,7 +44,8 @@ import { ClientFormDialogComponent } from './components/clients/client-form/clie
         DeleteCityDialogComponent,
         SnackbarMessageComponent,
         ClientsComponent,
-        ClientFormDialogComponent
+        ClientFormDialogComponent,
+        DeleteClientDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -63,7 +65,8 @@ import { ClientFormDialogComponent } from './components/clients/client-form/clie
         SnackbarMessageComponent,
         CityFormDialogComponent,
         DeleteCityDialogComponent,
-        ClientFormDialogComponent
+        ClientFormDialogComponent,
+        DeleteClientDialogComponent
     ],
     schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
     bootstrap: [AppComponent]

@@ -1,0 +1,23 @@
+<div class='dialog-container'>
+    <div class='dialog-header-wrapper d-flex align-items-center border-bottom'>
+        <div style='flex: 1;'>
+            <h5 class='font-weight-bold mb-0'>Delete client:<span class='ml-1' style='color: #d04141;'>{{client.name}}</span></h5>
+        </div>
+    </div>
+    <div class='dialog-secction-wrapper' style='padding-top: 30px;'>
+        <div class='w-100' style='padding: 20px; background: #ffe9e9; border-radius: 6px; border: 1px solid #f9dbdb;'>
+            <h6 class='mb-0 font-weight-light'><span class='mr-2 font-weight-bold' style='color: #ff5151;'>Warning:</span>By deleting this client you will also delete every order made by this client.</h6>
+        </div>
+    </div>
+    <div class='dialog-footer'>
+        <button mat-stroked-button class='animation pill-button mr-1' (click)='closeDialog(null);' style='background: lightgray; border-color: transparent;'>
+            Cancel
+        </button>
+        <button mat-stroked-button
+        class='animation pill-button danger'
+        [disabled]='deleting'
+        (click)='deleteClient();'>
+            <span>Delete</span>
+        </button>
+    </div>
+</div>

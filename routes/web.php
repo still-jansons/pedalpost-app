@@ -37,10 +37,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post('web/deleteCity', [CityController::class, 'deleteCity']);
 
     Route::get('web/getClients', [ClientController::class, 'getClients']);
+    Route::get('web/getClientsToken', [ClientController::class, 'getClientsToken']);
     Route::post('web/createClient', [ClientController::class, 'createClient']);
     Route::post('web/updateClientName', [ClientController::class, 'updateClientName']);
     Route::post('web/updateClientToken', [ClientController::class, 'updateClientToken']);
-    Route::get('web/getClientsToken', [ClientController::class, 'getClientsToken']);
+    Route::post('web/deleteClient', [ClientController::class, 'deleteClient']);
     
     Route::get('web/getOrdersByDate', [OrderController::class, 'getOrdersByDate']);
 

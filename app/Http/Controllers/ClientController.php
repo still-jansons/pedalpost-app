@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Crypt;
 
 use App\Models\Client;
+use App\Models\Order;
 
 class ClientController extends Controller
 {
@@ -65,6 +66,19 @@ class ClientController extends Controller
             $client->api_token = Crypt::decryptString($client->api_token);
             return $client;
         })->first();
+    }
+
+    public function deleteClient(Request $request) {
+        DB::transaction(function () use ($request) {
+            Order::where('client_uuid', $request->uuid)->delete();
+            Client::where('uuid', $request->uuid)->delete();
+        });
+
+        if (http_response_code(200)) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 
 }

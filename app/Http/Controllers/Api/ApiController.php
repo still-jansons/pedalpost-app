@@ -56,10 +56,10 @@ class ApiController extends Controller
             $response['we_deliver_here'] = 1;
             // Getting next 7 dates from now
             $dates = Calendar::where([
-                ['date', '>', date("Y-m-d")],
+                ['date', '>=', date("Y-m-d")],
                 ['holliday', 0]
             ])
-            ->limit(7)
+            ->limit($body->number_of_days)
             ->get([
                 'id as date_id',
                 'day_name',

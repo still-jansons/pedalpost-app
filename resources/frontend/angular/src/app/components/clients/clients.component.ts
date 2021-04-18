@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { HttpService } from 'src/app/services/http.service';
 import { ClientFormDialogComponent } from './client-form/client-form-dialog.component';
+import { DeleteClientDialogComponent } from './delete-client/dialog-delete-client.component';
 
 @Component({
     selector: 'app-clients',
@@ -74,6 +75,19 @@ export class ClientsComponent implements OnInit, OnDestroy {
     openClientFormDialog(cityData): void {
         const dialogRef = this.dialog.open(ClientFormDialogComponent, {
             data: JSON.parse(JSON.stringify(cityData)),
+            autoFocus: false,
+            disableClose: true
+        });
+        dialogRef.afterClosed().subscribe(data => {
+            if (data) {
+                this.getClients();
+            }
+        });
+    }
+
+    openDeleteClientDialog(client): void {
+        const dialogRef = this.dialog.open(DeleteClientDialogComponent, {
+            data: client,
             autoFocus: false,
             disableClose: true
         });
